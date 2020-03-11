@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct barang {
+struct barang {
     char kbarang [30];
     char nbarang [30];
     char bbarang [30];
@@ -22,7 +22,7 @@ void main()
         printf(":: Jumlah          :  ");scanf("\n%d", &bg[i].jbarang);
         printf(":: Harga Per Unit  :  Rp. ");scanf("%s", &bg[i].hbarang);
     }
-    system("cls");
+    system("clear");
     for(int i = 0; i < tc; i++)
     {
         printf("\n\nData barang ke %d : ", i+1);
