@@ -21,6 +21,21 @@ void gotoxy(int x,int y)
     printf("%c[%d;%df",0x1B,y,x);
 }
 
+void quit_program()
+{
+    for(int i = 3; i >= 0; i--)
+    {
+        system("cls");
+        gotoxy(45,11);printf("====================================\n");
+        gotoxy(45,12);printf("++++Program akan keluar dalam %d++++\n", i);
+        gotoxy(45,13);printf("====================================\n");
+        Sleep(1000);
+    }
+
+    gotoxy(45,15);printf("Terimakasih!!\n");
+    Sleep(1000);
+    exit(0);
+}
 
 void login()
 {
@@ -33,21 +48,22 @@ void login()
     gotoxy(51,18);get_time();
     gotoxy(45,14);printf("Username     : ");scanf("%s", usr);
     gotoxy(45,15);printf("Pass (max 8) : ");
+    int i = 0;
     while(1)
     {
-        int i = 0;
         ch = getch();
         if(ch != '\r')
         {
             pass[i] = ch;
             ch = '*' ;
             printf("%c",ch);
-            i++;
+            //i++;
         }
         else
         {
             break;
         }
+        i++;
     }
     login_check();
 }
@@ -74,22 +90,27 @@ void login_check()
         if(pil == 'y' || pil == 'Y') login();
         else
         {
-            for(int i = 3; i >= 0; i--)
-            {
-                system("cls");
-                gotoxy(45,11);printf("====================================\n");
-                gotoxy(45,12);printf("++++Program akan keluar dalam %d++++\n", i);
-                gotoxy(45,13);printf("====================================\n");
-                Sleep(1000);
-            }
-            exit(0);
+            quit_program();
         }
     }
 }
 
 void menu()
 {
-
+    system("cls");
+    gotoxy(45,11);printf("Selamat Datang di Kamus Ala Kadarnya\n");
+    gotoxy(45,12);printf("                                    \n");
+    gotoxy(45,13);printf("====================================\n");
+    gotoxy(45,14);printf("==========Silakan Pilih Menu========\n");
+    gotoxy(45,15);printf("1. Membuat Database Kamus\n");
+    gotoxy(45,16);printf("2. Menampilkan Isi Database Kamus\n");
+    gotoxy(45,17);printf("3. Menambah Data Kamus\n");
+    gotoxy(45,18);printf("4. Menghapus Database Kamus\n");
+    gotoxy(45,19);printf("5. Mengedit Database Kamus\n");
+    gotoxy(45,20);printf("6. Mencari Database Kamus\n");
+    gotoxy(45,21);printf("7. Mengurutkan Data pada Database\n");
+    gotoxy(45,22);printf("8. Log Aktivitas\n");
+    gotoxy(45,23);printf("9. Keluar dari Program\n");
 }
 
 struct tnode
@@ -142,10 +163,8 @@ void print_data()
     }
 }
 
-
-int main()
+void input_data()
 {
-    login();
     int tc;
     char ind[25], ja[25], ing[25], ga[25], ar[25];
     printf("Masukan banyak data : ");scanf("%d", &tc);
@@ -159,6 +178,13 @@ int main()
         printf("Bahasa Arti : ");scanf("%s", ar);
         insert_data(ind, ja, ing, ga, ar);
     }
+}
+
+
+int main()
+{
+    login();
+    input_data();
     print_data();
     return 0;
 }
