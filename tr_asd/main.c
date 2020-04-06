@@ -124,7 +124,7 @@ void login_check()
     int c1 = strcmp(usr, "admin"),c2 = strcmp(pass, "admin");
     if(c1 == 0 && c2 == 0)
     {
-        strcpy(log[log_i].act, "admin telah masuk");
+        strcpy(log[log_i].act, "Admin telah login");
         log_i++;
         system("cls");
         gotoxy(40,11);printf("====================================\n");
@@ -172,6 +172,7 @@ void menu()
 
 void insert_data()
 {
+    int tmpdt;
     system("color 2d");
     void header()
     {
@@ -195,7 +196,15 @@ void insert_data()
         gotoxy(40,15);printf(":: Bahasa Arti      : ");scanf("%s", &km[i].arti);
 
     }
-    strcpy(log[log_i].act, "admin telah membuat database");
+    tmpdt = tc_data;
+    char tmpstr[25];
+    sprintf(tmpstr, "%d", tmpdt);
+    char log_pre[] = "Admin memasukan ";
+    char log_suf[] = " data";
+    strcat(log_pre, tmpstr);
+    strcat(log_pre, log_suf);
+
+    strcpy(log[log_i].act, log_pre);
     log_i++;
 }
 
@@ -237,9 +246,17 @@ void add_data()
     gotoxy(40,13);printf(":: Bahasa Inggris   : ");scanf("%s", &km[tc_data].inggris);
     gotoxy(40,14);printf(":: Bahasa Gaul      : ");scanf("%s", &km[tc_data].gaul);
     gotoxy(40,15);printf(":: Bahasa Arti      : ");scanf("%s", &km[tc_data].arti);
-    tc_data += 1;
-    strcpy(log[log_i].act, "admin telah menambah data ");
+
+    char tmpstr[25];
+    sprintf(tmpstr, "%s %s %s %s %s", km[tc_data].indo, km[tc_data].jawa, km[tc_data].inggris, km[tc_data].gaul, km[tc_data].arti);
+    char log_pre[] = "Admin menambahkan ";
+    char log_suf[] = " ke database";
+    strcat(log_pre, tmpstr);
+    strcat(log_pre, log_suf);
+
+    strcpy(log[log_i].act, log_pre);
     log_i++;
+    tc_data += 1;
 }
 
 void delete_data()
@@ -275,7 +292,13 @@ void delete_data()
     gotoxy(40,6);printf("++++++++++++++++++++++++++++++++++++\n");
     gotoxy(40,8);printf("====================================\n");
     gotoxy(40,7);printf(":: Mau hapus bahasa apa (Indonesia) : ");gotoxy(80,7);scanf("%s", &cc);
-    strcpy(log[log_i].act, "admin telah menghapus data");
+    char tmpstr[25];
+    sprintf(tmpstr, "%s", cc);
+    char log_pre[] = "Admin menghapus data ";
+    char log_suf[] = " dari database";
+    strcat(log_pre, tmpstr);
+    strcat(log_pre, log_suf);
+    strcpy(log[log_i].act, log_pre);
     log_i++;
     for(int i = 0; i < tc_data; i++)
     {
@@ -341,11 +364,10 @@ void edit_data()
     gotoxy(40,8);printf("====================================\n");
     gotoxy(40,9);printf(":: indonesia/jawa/inggris/gaul/arti :: ");
     gotoxy(40,7);printf(":: Mau Edit bahasa apa : ");gotoxy(70,7);scanf("%s", &cc);
-    strcpy(log[log_i].act, "admin telah mengedit data ");
-    log_i++;
     if(strcmp(cc, "indonesia") == 0)
     {
         char edd[25];
+        char temp[25];
         system("cls");
         gotoxy(40,4);printf("==========================================\n");
         gotoxy(40,5);printf("Berikut adalah data dalam bahasa indonesia\n");
@@ -362,7 +384,6 @@ void edit_data()
             if(strcmp(km[i].indo, edd) == 0)
             {
                 system("cls");
-                char temp[25];
                 gotoxy(40,7);printf(":: Edit jadi apa : ");gotoxy(70,7);scanf("%s", &temp);
                 strcpy(km[i].indo, temp);
                 system("cls");
@@ -375,10 +396,19 @@ void edit_data()
                 gotoxy(40,7);printf(":: Data anda tidak ada ::");
             }
         }
+        char tmpstr[25];
+        sprintf(tmpstr, "%s menjadi %s", edd,temp);
+        char log_pre[] = "Admin mengedit data ";
+        char log_suf[] = " dari database";
+        strcat(log_pre, tmpstr);
+        strcat(log_pre, log_suf);
+        strcpy(log[log_i].act, log_pre);
+        log_i++;
     }
     else if(strcmp(cc, "jawa") == 0)
     {
         char edd[25];
+        char temp[25];
         system("cls");
         gotoxy(40,4);printf("==========================================\n");
         gotoxy(40,5);printf("Berikut adalah data dalam bahasa jawa\n");
@@ -395,7 +425,6 @@ void edit_data()
             if(strcmp(km[i].jawa, edd) == 0)
             {
                 system("cls");
-                char temp[25];
                 gotoxy(40,7);printf(":: Edit jadi apa : ");gotoxy(70,7);scanf("%s", &temp);
                 strcpy(km[i].jawa, temp);
                 system("cls");
@@ -408,10 +437,19 @@ void edit_data()
                 gotoxy(40,7);printf(":: Data anda tidak ada ::");
             }
         }
+        char tmpstr[25];
+        sprintf(tmpstr, "%s menjadi %s", edd,temp);
+        char log_pre[] = "Admin mengedit data ";
+        char log_suf[] = " dari database";
+        strcat(log_pre, tmpstr);
+        strcat(log_pre, log_suf);
+        strcpy(log[log_i].act, log_pre);
+        log_i++;
     }
     else if(strcmp(cc, "inggris") == 0)
     {
         char edd[25];
+        char temp[25];
         system("cls");
         gotoxy(40,4);printf("==========================================\n");
         gotoxy(40,5);printf("Berikut adalah data dalam bahasa inggris\n");
@@ -428,7 +466,6 @@ void edit_data()
             if(strcmp(km[i].inggris, edd) == 0)
             {
                 system("cls");
-                char temp[25];
                 gotoxy(40,7);printf(":: Edit jadi apa : ");gotoxy(70,7);scanf("%s", &temp);
                 strcpy(km[i].inggris, temp);
                 system("cls");
@@ -441,10 +478,19 @@ void edit_data()
                 gotoxy(40,7);printf(":: Data anda tidak ada ::");
             }
         }
+        char tmpstr[25];
+        sprintf(tmpstr, "%s menjadi %s", edd,temp);
+        char log_pre[] = "Admin mengedit data ";
+        char log_suf[] = " dari database";
+        strcat(log_pre, tmpstr);
+        strcat(log_pre, log_suf);
+        strcpy(log[log_i].act, log_pre);
+        log_i++;
     }
     else if(strcmp(cc, "gaul") == 0)
     {
         char edd[25];
+        char temp[25];
         system("cls");
         gotoxy(40,4);printf("==========================================\n");
         gotoxy(40,5);printf("Berikut adalah data dalam bahasa gaul\n");
@@ -461,7 +507,6 @@ void edit_data()
             if(strcmp(km[i].gaul, edd) == 0)
             {
                 system("cls");
-                char temp[25];
                 gotoxy(40,7);printf(":: Edit jadi apa : ");gotoxy(70,7);scanf("%s", &temp);
                 strcpy(km[i].gaul, temp);
                 system("cls");
@@ -474,10 +519,19 @@ void edit_data()
                 gotoxy(40,7);printf(":: Data anda tidak ada ::");
             }
         }
+        char tmpstr[25];
+        sprintf(tmpstr, "%s menjadi %s", edd,temp);
+        char log_pre[] = "Admin mengedit data ";
+        char log_suf[] = " dari database";
+        strcat(log_pre, tmpstr);
+        strcat(log_pre, log_suf);
+        strcpy(log[log_i].act, log_pre);
+        log_i++;
     }
     else if(strcmp(cc, "arti") == 0)
     {
         char edd[25];
+        char temp[25];
         system("cls");
         gotoxy(40,4);printf("==========================================\n");
         gotoxy(40,5);printf("Berikut adalah data dalam bahasa arti\n");
@@ -494,7 +548,6 @@ void edit_data()
             if(strcmp(km[i].arti, edd) == 0)
             {
                 system("cls");
-                char temp[25];
                 gotoxy(40,7);printf(":: Edit jadi apa : ");gotoxy(70,7);scanf("%s", &temp);
                 strcpy(km[i].arti, temp);
                 system("cls");
@@ -507,6 +560,14 @@ void edit_data()
                 gotoxy(40,7);printf(":: Data anda tidak ada ::");
             }
         }
+        char tmpstr[25];
+        sprintf(tmpstr, "%s menjadi %s", edd,temp);
+        char log_pre[] = "Admin mengedit data ";
+        char log_suf[] = " dari database";
+        strcat(log_pre, tmpstr);
+        strcat(log_pre, log_suf);
+        strcpy(log[log_i].act, log_pre);
+        log_i++;
     }
     else
     {
@@ -526,8 +587,6 @@ void search_data()
     gotoxy(40,8);printf("====================================\n");
     gotoxy(40,9);printf(":: indonesia/jawa/inggris/gaul/arti :: ");
     gotoxy(40,7);printf(":: Mau cari berdasarkan bahasa apa : ");gotoxy(80,7);scanf("%s", &cc);
-    strcpy(log[log_i].act, "admin telah mencari data ");
-    log_i++;
     if(strcmp(cc, "indonesia") == 0)
     {
         char scc[25];
@@ -537,6 +596,14 @@ void search_data()
         gotoxy(40,7);printf("==========================================\n");
         gotoxy(40,9);printf("==========================================\n");
         gotoxy(40,8);printf("Masukan kata anda dalam bahasa indonesia : \n");gotoxy(85,8);scanf("%s", &scc);
+        char tmpstr[25];
+        sprintf(tmpstr, "%s", scc);
+        char log_pre[] = "Admin mencari data ";
+        char log_suf[] = " dari database";
+        strcat(log_pre, tmpstr);
+        strcat(log_pre, log_suf);
+        strcpy(log[log_i].act, log_pre);
+        log_i++;
         for(int i = 0; i < tc_data; i++)
         {
             if(strcmp(km[i].indo, scc) == 0)
@@ -707,7 +774,13 @@ void sort_data()
     gotoxy(40,8);printf("====================================\n");
     gotoxy(40,9);printf(":: indonesia/jawa/inggris/gaul/arti :: ");
     gotoxy(40,7);printf(":: Mau urutkan berdasarkan bahasa apa : ");gotoxy(80,7);scanf("%s", &cc);
-    strcpy(log[log_i].act, "admin telah mencari data ");
+    char tmpstr[25];
+    sprintf(tmpstr, "%s", cc);
+    char log_pre[] = "Admin mengurutkan data berdasarkan bahasa ";
+    char log_suf[] = " dari database";
+    strcat(log_pre, tmpstr);
+    strcat(log_pre, log_suf);
+    strcpy(log[log_i].act, log_pre);
     log_i++;
     if(strcmp(cc, "indonesia") == 0)
     {
