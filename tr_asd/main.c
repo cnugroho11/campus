@@ -150,6 +150,7 @@ void login_check()
 
 void menu()
 {
+    //672018039
     int cek;
     system("color 4f");
     system("cls");
@@ -225,7 +226,7 @@ void print_data()
         gotoxy(70,13+i);printf("%s ", km[i].gaul);
         gotoxy(90,13+i);printf("%s ", km[i].arti);
     }
-    strcpy(log[log_i].act, "admin telah melihat data");
+    strcpy(log[log_i].act, "Admin telah melihat data");
     log_i++;
     getch();
 }
@@ -325,7 +326,7 @@ void delete_data()
                 tc_data -= 1;
             }
         }
-        if(strcmp(km[i].indo, cc) != 0 && i == tc_data-1)
+        if(strcmp(km[i].indo, cc) != 0 && i == tc_data)
         {
             gotoxy(10,13);printf(":: Data anda tidak ada ::");
             getch();
